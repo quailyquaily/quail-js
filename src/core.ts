@@ -145,14 +145,6 @@ export class Client{
     })
   }
 
-  batchAddSubscribers(list_id: number | string, members: any[], ctoken: string): Promise<any> {
-    return this.request(`/subscriptions/${list_id}/add-members`, 'POST', {
-      'challenge-action': 'subscribe',
-      'challenge-token': ctoken,
-      'members': members,
-    })
-  }
-
   updateSubscriber(list_id: number | string, member_id: number, payload: any): Promise<any> {
     return this.request(`/subscriptions/${list_id}/members/${member_id}`, 'PUT', payload)
   }

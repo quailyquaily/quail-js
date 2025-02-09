@@ -1,6 +1,25 @@
+function displace(attrs) {
+  let tag = 'script'
+  if (attrs?.rel === 'stylesheet') {
+    tag = 'link'
+  }
+
+  let ret = [];
+  if (tag === 'script') {
+    ret = document.querySelectorAll('script[hid="' + attrs.hid + '"]');
+  } else {
+    ret = document.querySelectorAll('link[hid="' + attrs.hid + '"]');
+  }
+  if (ret) {
+    for (let i = 0; i < ret.length; i++) {
+      ret[i].remove();
+    }
+  }
+}
+
 async function inject(link, attrs) {
   let tag = "script";
-  if (link.slice(link.length - 4) === ".css") {
+  if (link.slice(link.length - 4) === '.css' || attrs?.rel === 'stylesheet') {
     tag = "link";
   }
 
@@ -111,6 +130,7 @@ function getQueryParams() {
 
 
 export {
+  displace,
   inject,
   wait,
   debounce,
