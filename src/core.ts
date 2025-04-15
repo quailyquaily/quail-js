@@ -137,12 +137,32 @@ export class Client{
     return this.request(`/users/${user_id}/lists`, 'GET', null)
   }
 
+  // @TODO: 准备弃用
   subscribe(list_id: number | string, email: string, ctoken: string): Promise<any> {
     return this.request(`/subscriptions/${list_id}`, 'POST', {
       email,
       'challenge-action': 'subscribe',
       'challenge-token': ctoken,
     })
+  }
+
+  subscribeWithChallenge(list_id: number | string, email: string, params: any): Promise<any> {
+    if (params['provider'] === 'turnstile') {
+      return this.request(`/subscriptions/${list_id}`, 'POST', {
+        email,
+        'challenge-provider': 'turnstile',
+        'challenge-action': params['action'],
+        'challenge-token': params['token'],
+      })
+    } else if (params['provider'] === 'tencentcloud') {
+      return this.request(`/subscriptions/${list_id}`, 'POST', {
+        email,
+        'challenge-provider': 'tencentcloud',
+        'challenge-action': params['action'],
+        'challenge-nonce': params['randstr'],
+        'challenge-ticket': params['ticket'],
+      })
+    }
   }
 
   updateSubscriber(list_id: number | string, member_id: number, payload: any): Promise<any> {
