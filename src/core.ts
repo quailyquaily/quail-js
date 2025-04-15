@@ -156,6 +156,8 @@ export class Client{
       payload['challenge-nonce'] = params['randstr']
       payload['challenge-ticket'] = params['ticket']
     }
+    console.log('params', params)
+    console.log('payload', payload)
     return this.request(`/subscriptions/${list_id}`, 'POST', payload)
   }
 

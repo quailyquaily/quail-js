@@ -34,12 +34,12 @@ function crackError(err) {
       };
     } else {
       errorInfo = {
-        message: err.message,
+        message: err.message || err.msg,
       };
     }
   } else {
     errorInfo = {
-      message: err.message,
+      message: err.message || err.msg,
     };
   }
 
