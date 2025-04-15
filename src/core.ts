@@ -147,22 +147,16 @@ export class Client{
   }
 
   subscribeWithChallenge(list_id: number | string, email: string, params: any): Promise<any> {
-    if (params['provider'] === 'turnstile') {
-      return this.request(`/subscriptions/${list_id}`, 'POST', {
-        email,
-        'challenge-provider': 'turnstile',
-        'challenge-action': params['action'],
-        'challenge-token': params['token'],
-      })
-    } else if (params['provider'] === 'tencentcloud') {
-      return this.request(`/subscriptions/${list_id}`, 'POST', {
-        email,
-        'challenge-provider': 'tencentcloud',
-        'challenge-action': params['action'],
-        'challenge-nonce': params['randstr'],
-        'challenge-ticket': params['ticket'],
-      })
+    let payload = { email, 'challenge-provider': params['challenge-provider'] }
+    if (params['challenge-provider'] === 'turnstile') {
+      payload['challenge-action'] = params['action']
+      payload['challenge-token'] = params['token']
+    } else if (params['challenge-provider'] === 'tencentcloud') {
+      payload['challenge-action'] = params['action']
+      payload['challenge-nonce'] = params['randstr']
+      payload['challenge-ticket'] = params['ticket']
     }
+    return this.request(`/subscriptions/${list_id}`, 'POST', payload)
   }
 
   updateSubscriber(list_id: number | string, member_id: number, payload: any): Promise<any> {
