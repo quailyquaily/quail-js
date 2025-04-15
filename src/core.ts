@@ -149,15 +149,13 @@ export class Client{
   subscribeWithChallenge(list_id: number | string, email: string, params: any): Promise<any> {
     let payload = { email, 'challenge-provider': params['challenge-provider'] }
     if (params['challenge-provider'] === 'turnstile') {
-      payload['challenge-action'] = params['action']
-      payload['challenge-token'] = params['token']
+      payload['challenge-action'] = params['challenge-action']
+      payload['challenge-token'] = params['challenge-token']
     } else if (params['challenge-provider'] === 'tencentcloud') {
-      payload['challenge-action'] = params['action']
-      payload['challenge-nonce'] = params['randstr']
-      payload['challenge-ticket'] = params['ticket']
+      payload['challenge-action'] = params['challenge-action']
+      payload['challenge-nonce'] = params['challenge-nonce']
+      payload['challenge-ticket'] = params['challenge-ticket']
     }
-    console.log('params', params)
-    console.log('payload', payload)
     return this.request(`/subscriptions/${list_id}`, 'POST', payload)
   }
 
