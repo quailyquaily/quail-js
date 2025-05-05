@@ -45,7 +45,6 @@ async function inject(link, attrs) {
       document.body.appendChild(script);
     } else {
       script.setAttribute("href", link);
-      script.setAttribute("rel", "stylesheet");
       document.head.appendChild(script);
     }
     return new Promise((resolve, reject) => {
