@@ -19,7 +19,7 @@ function displace(attrs) {
 
 async function inject(link, attrs) {
   let tag = "script";
-  if (link.slice(link.length - 4) === '.css' || attrs?.rel === 'stylesheet') {
+  if (link.slice(link.length - 4) === '.css' || attrs?.rel === 'stylesheet' || attrs?.as === 'style') {
     tag = "link";
   }
 
