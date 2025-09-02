@@ -415,8 +415,21 @@ export class Client{
     return this.requestFormData(`/attachments${appended}`, formData);
   }
 
-  incCount(post_id, field): Promise<any>  {
-    return this.request(`/posts/${field}?id=${post_id}`, 'POST', null)
+  incCount(post_id, field, utmParams = null): Promise<any>  {
+    let url = `/posts/${field}?id=${post_id}`;
+    
+    if (utmParams && typeof utmParams === 'object') {
+      const utmQueryParams = Object.entries(utmParams)
+        .filter(([key, value]) => value !== null && value !== undefined && value !== '')
+        .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`)
+        .join('&');
+      
+      if (utmQueryParams) {
+        url += `&${utmQueryParams}`;
+      }
+    }
+    
+    return this.request(url, 'POST', null)
   }
 
   getPostsOfMySubscriptions(offset = 0, limit = 16): Promise<any>  {
