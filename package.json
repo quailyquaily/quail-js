@@ -1,6 +1,6 @@
 {
   "name": "quail-js",
-  "version": "0.3.27",
+  "version": "0.3.28",
   "description": "Javascript client for Quail.ink",
   "main": "dist/quail.min.js",
   "jsdelivr": "dist/quail.min.js",
