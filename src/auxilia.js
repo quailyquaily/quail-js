@@ -10,7 +10,7 @@ export class AuxiliaClient{
 	constructor(opts) {
     this.apikey = opts.apikey || "";
     this.access_token = opts.access_token || "";
-    this.apibase = opts.apibase || "https://api.quail.ink/auxilia";
+    this.apibase = opts.apibase || "https://api.quaily.com/auxilia";
     this.debug = opts.debug || false;
 	}
 
@@ -304,4 +304,3 @@ export class AuxiliaClient{
     return this.request(url, 'GET', null);
   }
 }
-

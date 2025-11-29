@@ -10,7 +10,7 @@ export class Client {
   constructor(opts: any) {
     this.apikey = opts.apikey || "";
     this.access_token = opts.access_token || "";
-    this.apibase = opts.apibase || "https://api.quail.ink";
+    this.apibase = opts.apibase || "https://api.quaily.com";
     this.debug = opts.debug || false;
   }
 
